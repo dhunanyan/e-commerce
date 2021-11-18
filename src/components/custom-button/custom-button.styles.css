@@ -21,6 +21,16 @@
 .custom-button:hover {
   background-color: white;
   color: black;
-  border: 1px solid black;
+}
+
+.custom-button.google-sign-in {
+  background-color: #4285f4;
+  color: #f1f1f1;
+  border: 1px solid #4285f4;
+}
+
+.custom-button.google-sign-in:hover {
+  background-color: #f1f1f1;
+  color: #4285f4;
 }
 /*# sourceMappingURL=custom-button.styles.css.map */
