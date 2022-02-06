@@ -1,8 +1,5 @@
 .cart-dropdown {
-  transition: all 350 ease-out;
   position: absolute;
-  width: 340px;
-  height: 340px;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -13,11 +10,17 @@
   z-index: 998;
   border-radius: 5px;
 
+  .empty-message {
+    font-size: 32px;
+    text-align: center;
+    padding: 0px 20px 20px 20px;
+  }
+
   .cart-items {
-    height: 240px;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    align-items: center;
   }
 
   button {
@@ -27,6 +30,7 @@
   /* width */
   ::-webkit-scrollbar {
     width: 10px;
+    transition: all 350ms ease-out;
   }
 
   /* Track */
