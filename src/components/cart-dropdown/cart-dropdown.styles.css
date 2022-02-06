@@ -1,6 +1,8 @@
 .cart-dropdown {
+  -webkit-transition: all 350 ease-out;
+  transition: all 350 ease-out;
   position: absolute;
-  width: 240px;
+  width: 340px;
   height: 340px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10,11 +12,16 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 20px;
-  border: 1px solid black;
-  background-color: white;
-  top: 90px;
-  right: 40px;
-  z-index: 5;
+  border: 1px solid #303030;
+  background-color: #f1f1f1;
+  top: 65px;
+  right: 0px;
+  z-index: 998;
+  border-radius: 5px;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
 }
 
 .cart-dropdown .cart-items {
@@ -31,5 +38,21 @@
 
 .cart-dropdown button {
   margin-top: auto;
+}
+
+.cart-dropdown ::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cart-dropdown ::-webkit-scrollbar-track {
+  background: #d0d0d0;
+}
+
+.cart-dropdown ::-webkit-scrollbar-thumb {
+  background: #525252;
+}
+
+.cart-dropdown ::-webkit-scrollbar-thumb:hover {
+  background: #414141;
 }
 /*# sourceMappingURL=cart-dropdown.styles.css.map */

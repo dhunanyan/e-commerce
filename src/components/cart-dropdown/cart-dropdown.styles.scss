@@ -1,15 +1,17 @@
 .cart-dropdown {
+  transition: all 350 ease-out;
   position: absolute;
-  width: 240px;
+  width: 340px;
   height: 340px;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 1px solid black;
-  background-color: white;
-  top: 90px;
-  right: 40px;
-  z-index: 5;
+  border: 1px solid #303030;
+  background-color: #f1f1f1;
+  top: 65px;
+  right: 0px;
+  z-index: 998;
+  border-radius: 5px;
 
   .cart-items {
     height: 240px;
@@ -20,5 +22,25 @@
 
   button {
     margin-top: auto;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #d0d0d0;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #525252;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #414141;
   }
 }

@@ -6,8 +6,8 @@ import CartItem from "../cart-item/cart-item.component";
 
 import "./cart-dropdown.styles.scss";
 
-const CartDropdown = ({ cartItems }) => (
-  <div className="cart-dropdown">
+const CartDropdown = ({ cartItems, hidden }) => (
+  <div className={`cart-dropdown ${hidden ? "cart-dropdown--hidden" : ""}`}>
     <div className="cart-items">
       {cartItems.map((cartItem) => (
         <CartItem key={cartItem.id} item={cartItem} />

@@ -1,14 +1,30 @@
 .header {
   height: 70px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  opacity: 0.95;
+  background-color: #f1f1f1;
+
+  .header-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    height: 100%;
+  }
 
   .logo-container {
-    height: 100%;
-    width: 70px;
-    padding: 25px;
+    max-width: 70px;
+
+    img {
+      width: 100%;
+    }
   }
 
   .options {
@@ -17,10 +33,25 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: relative;
 
     .option {
       padding: 10px 15px;
       cursor: pointer;
+    }
+
+    .cart-dropdown {
+      transition: transform 350ms ease-out, opacity 500ms ease-out;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+
+      &.cart-dropdown--hidden {
+        transition: transform 350ms ease-out, opacity 500ms ease-out;
+        transform: translateY(-50px);
+        opacity: 0;
+        pointer-events: none;
+      }
     }
   }
 }
