@@ -1,0 +1,14 @@
+yarn run v1.22.17
+$ react-scripts start
+[34mi[39m [90m｢wds｣[39m: Project is running at http://192.168.0.20/
+[34mi[39m [90m｢wds｣[39m: webpack output is served from 
+[34mi[39m [90m｢wds｣[39m: Content not from webpack is served from C:\Users\Davit Hunanyan\Desktop\programming\React\e-commerce\public
+[34mi[39m [90m｢wds｣[39m: 404s will fallback to /
+Starting the development server...
+
+Failed to compile.
+
+./src/components/cart-icon/cart-icon.component.jsx
+Module not found: Can't resolve 'core-js/library/fn/reflect/es7/metadata' in 'C:\Users\Davit Hunanyan\Desktop\programming\React\e-commerce\src\components\cart-icon'
+Compiling...
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
