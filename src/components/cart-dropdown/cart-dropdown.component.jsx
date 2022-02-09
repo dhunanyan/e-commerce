@@ -8,6 +8,7 @@ import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
+import { CSSTransition } from "react-transition-group";
 import "./cart-dropdown.styles.scss";
 
 const CartDropdown = ({ cartItems, hidden, history, dispatch }) => (
@@ -20,8 +21,16 @@ const CartDropdown = ({ cartItems, hidden, history, dispatch }) => (
   >
     <div className="cart-items">
       {cartItems.length ? (
-        cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} item={cartItem} />
+        cartItems.map((cartItem, index) => (
+          <CSSTransition
+            in={true}
+            appear={true}
+            timeout={500}
+            classNames="fade-in"
+            key={index}
+          >
+            <CartItem key={cartItems.id} cartItem={cartItem} />
+          </CSSTransition>
         ))
       ) : (
         <span className="empty-message">Your cart is empty...</span>

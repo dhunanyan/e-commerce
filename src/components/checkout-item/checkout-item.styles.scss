@@ -1,19 +1,27 @@
 .checkout-item {
   width: 100%;
   display: flex;
-  min-height: 100px;
+  height: 200px;
   border-bottom: 1px solid darkgrey;
-  padding: 15px 0;
+  padding: 20px;
   font-size: 20px;
   align-items: center;
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+  background-color: #303030;
+  margin: 2.5px 0;
+  color: #f1f1f1;
 
   .image-container {
-    width: 23%;
-    padding-right: 15px;
+    width: 140px;
+    height: 160px;
+    margin-right: 15px;
+    overflow: hidden;
+    border-radius: 14px;
 
     img {
       width: 100%;
-      height: 100%;
     }
   }
   .name,
@@ -29,5 +37,43 @@
   .remove-button {
     padding-left: 12px;
     cursor: pointer;
+    color: #f1f1f1;
+  }
+}
+
+.fade-out-enter.fade-out-enter-active {
+  transform: translate(0, -200px);
+  transition: all 500ms ease-out;
+  opacity: 0;
+  background-color: #f1f1f1;
+  color: #303030;
+  z-index: -1;
+
+  .remove-button {
+    color: #303030;
+  }
+}
+
+.fade-out-exit.fade-out-exit-active {
+  transform: translate(0, -200px);
+  background-color: #f1f1f1;
+  opacity: 0;
+  color: #303030;
+  z-index: -1;
+
+  .remove-button {
+    color: #303030;
+  }
+}
+
+.fade-out-exit-done {
+  transform: translate(0, -200px);
+  opacity: 0;
+  background-color: #f1f1f1;
+  color: #303030;
+  z-index: -1;
+
+  .remove-button {
+    color: #303030;
   }
 }

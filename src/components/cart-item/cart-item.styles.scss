@@ -7,6 +7,13 @@
   padding: 5px;
   background-color: #ddd;
   margin: 0 10px 10px 0;
+  transition: all 350ms ease-out;
+  opacity: 0;
+  transition: opacity 350ms ease-out;
+
+  &--show {
+    opacity: 1;
+  }
 
   .cart-img {
     width: 80px;
@@ -17,12 +24,6 @@
     img {
       max-width: 100%;
     }
-  }
-
-  .cart-line {
-    background-color: #303030;
-    height: 3px;
-    width: 100%;
   }
 
   .item-details {
