@@ -13,7 +13,6 @@
 
   .checkout-header {
     width: 100%;
-    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid darkgrey;
@@ -23,7 +22,18 @@
 
     .header-block {
       text-transform: capitalize;
-      width: 40px;
+      width: 100px;
+      text-align: center;
+      margin: 0 5px;
+
+      &:first-of-type {
+        width: 160px;
+        margin-left: 0;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
     }
   }
 
