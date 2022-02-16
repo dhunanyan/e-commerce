@@ -13,7 +13,6 @@ import { FaTimes as Times } from "react-icons/fa";
 
 import { CSSTransition } from "react-transition-group";
 import "./checkout-item.styles.scss";
-import { animateScroll as scroll } from "react-scroll";
 
 const CheckoutItem = ({
   cartItem,
@@ -43,7 +42,6 @@ const CheckoutItem = ({
             className="arrow"
             onClick={() => {
               removeItem(cartItem);
-              console.log(quantity);
 
               if (quantity === 1) {
                 setIsRemoved(true);
