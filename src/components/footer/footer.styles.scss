@@ -1,15 +1,19 @@
 .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   color: #303030;
   background-color: #e0e0e0;
   height: 70px;
   width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: -70px;
-  padding: 0 60px;
+
+  &__container {
+    max-width: 1300px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &__img {
     max-width: 30px;
@@ -34,5 +38,13 @@
     justify-content: center;
     align-items: center;
     margin: 0 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    &__container {
+      padding: 0 30px;
+    }
   }
 }

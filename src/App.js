@@ -18,6 +18,9 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selector";
 
 class App extends React.Component {
+  state = {
+    isBodyLocked: false,
+  };
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -44,25 +47,36 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header />
+    const bodyLockHandle = (isMenuActive) => {
+      this.setState({ isBodyLocked: isMenuActive });
+    };
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SigninAndSignupPage />
-              )
-            }
-          />
-        </Switch>
+    return (
+      <div
+        scroll={`${this.state.isBodyLocked ? "no" : "yes"}`}
+        className={`wrapper ${
+          this.state.isBodyLocked ? "wrapper--locked" : ""
+        }`}
+      >
+        <Header bodyLock={bodyLockHandle} />
+
+        <div className="body-container">
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
+            <Route
+              path="/signin"
+              render={() =>
+                this.props.currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <SigninAndSignupPage />
+                )
+              }
+            />
+          </Switch>
+        </div>
 
         <Footer />
       </div>

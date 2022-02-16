@@ -5,11 +5,26 @@
   top: 0;
   left: 0;
   z-index: 9999;
-  opacity: 0.95;
-  background-color: #f1f1f1;
+  background-color: rgba(241, 241, 241, 0.95);
   color: #303030;
+  pointer-events: all;
 
-  .header-container {
+  &::after {
+    content: "";
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(241, 241, 241, 0);
+    color: #303030;
+    pointer-events: all;
+    border-bottom: 1px solid #303030;
+    box-shadow: -1px 3px 5px -3px rgba(0, 0, 0, 0.75);
+  }
+
+  &__container {
     max-width: 1300px;
     margin: 0 auto;
     width: 100%;
@@ -20,69 +35,173 @@
     height: 100%;
   }
 
-  .logo-container {
+  &__img {
     max-width: 70px;
+    position: relative;
+    z-index: 9999;
 
     img {
       width: 100%;
     }
   }
 
-  .options {
-    width: 50%;
+  &__list {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     position: relative;
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+    z-index: 9999;
+  }
 
-    .option {
-      padding: 8px 15px;
-      cursor: pointer;
-      border-radius: 5px;
+  &__item {
+    min-width: max-content;
+    margin: 0 8px 0 0;
+  }
+
+  &__link {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 350ms ease-out;
+    font-weight: 700;
+    font-size: 20px;
+    min-width: max-content;
+    text-decoration: none;
+    color: #303030;
+
+    &:hover {
+      background-color: #303030;
+      color: #f1f1f1;
+    }
+  }
+
+  &__toggle {
+    font-size: 34px;
+    height: 34px;
+    width: 34px;
+    line-height: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 19px;
+    right: 30px;
+    display: none;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  &__bars {
+    transition: all 150ms ease-out;
+
+    &:hover {
+      transform: translateX(-8px);
+    }
+  }
+
+  &__times {
+    transition: all 400ms ease-out;
+
+    &:hover {
+      transform: rotate(270deg);
+    }
+  }
+}
+
+.cart-dropdown {
+  transition: max-height 1s ease-out, opacity 500ms ease-out,
+    transform 350ms ease-out;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  max-height: 178px;
+
+  &--zoom {
+    transition: max-height 1s ease-out, opacity 500ms ease-out,
+      transform 350ms ease-out;
+    max-height: 200px;
+  }
+
+  &--zoom1 {
+    transition: max-height 1s ease-out, opacity 500ms ease-out,
+      transform 350ms ease-out;
+    max-height: 300px;
+  }
+
+  &--zoom2 {
+    transition: max-height 1s ease-out, opacity 500ms ease-out,
+      transform 350ms ease-out;
+    max-height: 400px;
+  }
+
+  &--hidden {
+    transition: transform 350ms ease-out, opacity 500ms ease-out;
+    transform: translateY(-50px);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    &__container {
+      padding: 0 30px;
+    }
+
+    &__list {
+      position: absolute;
+      z-index: 9997;
+      height: 100vh;
+      width: 100%;
+      top: 70px;
+      left: -100%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0;
+      background-color: rgba(116, 116, 116, 0.95);
       transition: all 350ms ease-out;
-      margin: 0 8px 0 0;
-      font-weight: 700;
-      font-size: 20px;
+      pointer-events: none;
 
-      &:hover {
-        background-color: #303030;
-        color: #f1f1f1;
+      &--active {
+        left: 0;
       }
     }
 
-    .cart-dropdown {
-      transition: max-height 1s ease-out, opacity 500ms ease-out,
-        transform 350ms ease-out;
-      opacity: 1;
-      transform: translateY(0);
+    &__item {
+      margin: 20px 0;
+      opacity: 0.0000001;
+      transform: translateX(-170px);
+      transition: all 350ms ease-out;
+      pointer-events: none;
+
+      &--fade {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: all;
+      }
+    }
+
+    &__link {
+      font-size: 28px;
+      color: #f1f1f1;
+
+      &:hover {
+        background-color: #f1f1f1;
+        color: #303030;
+      }
+    }
+
+    &__toggle {
+      display: block;
       pointer-events: all;
-      width: 340px;
-      max-height: 170px;
+    }
 
-      &--zoom {
-        transition: max-height 1s ease-out, opacity 500ms ease-out,
-          transform 350ms ease-out;
-        max-height: 192px;
-      }
-
-      &--zoom1 {
-        transition: max-height 1s ease-out, opacity 500ms ease-out,
-          transform 350ms ease-out;
-        max-height: 292px;
-      }
-
+    .cart-dropdown {
       &--zoom2 {
-        transition: max-height 1s ease-out, opacity 500ms ease-out,
-          transform 350ms ease-out;
-        max-height: 392px;
-      }
-
-      &--hidden {
-        transition: transform 350ms ease-out, opacity 500ms ease-out;
-        transform: translateY(-50px);
-        opacity: 0;
-        pointer-events: none;
+        max-height: 300px;
       }
     }
   }

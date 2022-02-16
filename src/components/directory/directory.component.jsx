@@ -14,7 +14,7 @@ const Directory = ({ sections }) => (
       <MenuItem
         key={id}
         {...otherSectionProps}
-        className={`menu-item menu-item--${otherSectionProps.title}`}
+        className={`menu-item directory-menu__item directory-menu__item--${otherSectionProps.title}`}
       />
     ))}
   </div>

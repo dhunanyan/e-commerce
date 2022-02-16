@@ -7,12 +7,14 @@ import "./footer.styles.scss";
 
 const Footer = () => (
   <footer className="footer">
-    <div className="footer__img">
-      <Logo className="logo" />
+    <div className="footer__container">
+      <div className="footer__img">
+        <Logo className="logo" />
+      </div>
+      <p className="footer__descr">
+        Made with <Heart className="footer__icon" /> by Davit Hunanyan
+      </p>
     </div>
-    <p className="footer__descr">
-      Made with <Heart className="footer__icon" /> by Davit Hunanyan
-    </p>
   </footer>
 );
 

@@ -2,18 +2,42 @@
   display: flex;
   flex-direction: column;
 
-  .title {
+  &__title {
     font-size: 38px;
     margin: 0 auto 30px;
   }
 
-  .items {
+  &__items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
 
     & .collection-item {
       margin-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .collection-page {
+    &__items {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .collection-page {
+    &__items {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .collection-page {
+    &__items {
+      grid-template-columns: 1fr;
     }
   }
 }

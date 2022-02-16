@@ -35,3 +35,22 @@
     font-weight: bold;
   }
 }
+
+@media (max-width: 768px) {
+  .cart-icon {
+    color: #f1f1f1;
+
+    &:hover {
+      background-color: #f1f1f1;
+      color: #303030;
+
+      .shopping-icon {
+        color: #303030;
+      }
+    }
+
+    .shopping-icon {
+      color: #f1f1f1;
+    }
+  }
+}

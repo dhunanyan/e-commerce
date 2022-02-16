@@ -51,13 +51,27 @@
 
     .arrow {
       cursor: pointer;
-
+      text-align: center;
+      justify-content: center;
+      justify-items: center;
       display: flex;
       align-items: center;
+
+      &--left {
+        grid-area: leftSide;
+      }
+
+      &--right {
+        grid-area: rightSide;
+      }
     }
 
     .value {
-      margin: 0 5px;
+      grid-area: mid;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
     }
   }
 
@@ -101,5 +115,111 @@
 
   .remove-button {
     color: #303030;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-item {
+    flex-direction: column;
+    height: 490px;
+    max-width: 500px;
+    width: auto;
+    margin: 0;
+
+    &__inner {
+      width: 100%;
+
+      &::before {
+        background-color: #858585;
+        color: #303030;
+        font-weight: 700;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+        content: "Description: ";
+      }
+
+      &:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+
+        &::after {
+          content: "";
+          margin: 8px 0;
+          width: 100%;
+          height: 3px;
+          background-color: #f1f1f1;
+        }
+      }
+
+      &:nth-child(3) {
+        &::before {
+          content: "Quantity: ";
+          text-align: center;
+          grid-area: topSide;
+          background-color: #858585;
+          color: #303030;
+          font-weight: 700;
+          width: 100%;
+          text-align: center;
+          margin: 5px 0;
+        }
+
+        display: grid;
+        grid-template-areas:
+          "topSide topSide topSide"
+          "leftSide mid rightSide"
+          "bottomSide bottomSide bottomSide";
+        grid-template-rows: 1fr 1fr 19px;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        &::after {
+          content: "";
+          margin: 8px 0;
+          width: 100%;
+          height: 3px;
+          background-color: #f1f1f1;
+          grid-area: bottomSide;
+        }
+      }
+
+      &:nth-child(4) {
+        &::before {
+          content: "Price: ";
+          background-color: #858585;
+          color: #303030;
+          font-weight: 700;
+          width: 100%;
+          text-align: center;
+          margin: 5px 0;
+        }
+
+        display: flex;
+        flex-direction: column;
+
+        &::after {
+          content: "";
+          margin: 8px 0;
+          width: 100%;
+          height: 3px;
+          background-color: #f1f1f1;
+        }
+      }
+
+      &:nth-child(5) {
+        &::before {
+          content: "Remove: ";
+          background-color: #858585;
+          color: #303030;
+          font-weight: 700;
+          width: 100%;
+          text-align: center;
+          margin: 5px 0;
+        }
+
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 }

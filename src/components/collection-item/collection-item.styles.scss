@@ -60,3 +60,15 @@
     }
   }
 }
+
+@media (max-width: 950px) {
+  .collection-item {
+    height: 224px;
+  }
+}
+
+@media (max-width: 768px) {
+  .collection-item {
+    height: 240px;
+  }
+}

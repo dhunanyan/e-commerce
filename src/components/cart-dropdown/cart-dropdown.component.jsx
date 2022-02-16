@@ -9,15 +9,24 @@ import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
 import { CSSTransition } from "react-transition-group";
+
+import { BsFillArrowUpSquareFill as Close } from "react-icons/bs";
+
 import "./cart-dropdown.styles.scss";
 
-const CartDropdown = ({ cartItems, hidden, history, dispatch }) => (
+const CartDropdown = ({
+  cartItems,
+  hidden,
+  history,
+  dispatch,
+  toggleCartHidden,
+}) => (
   <div
-    className={`cart-dropdown 
-    ${hidden ? "cart-dropdown--hidden" : ""} 
-    ${cartItems.length >= 1 ? "cart-dropdown--zoom" : ""} 
-    ${cartItems.length >= 2 ? "cart-dropdown--zoom1" : ""} 
-    ${cartItems.length >= 3 ? "cart-dropdown--zoom2" : ""}`}
+    className={`cart-dropdown ${hidden ? "cart-dropdown--hidden" : ""} ${
+      cartItems.length >= 1 ? "cart-dropdown--zoom" : ""
+    } ${cartItems.length >= 2 ? "cart-dropdown--zoom1" : ""} ${
+      cartItems.length >= 3 ? "cart-dropdown--zoom2" : ""
+    }`}
   >
     <div className="cart-items">
       {cartItems.length ? (
@@ -36,14 +45,19 @@ const CartDropdown = ({ cartItems, hidden, history, dispatch }) => (
         <span className="empty-message">Your cart is empty...</span>
       )}
     </div>
-    <CustomButton
-      onClick={() => {
-        history.push("/checkout");
-        dispatch(toggleCartHidden());
-      }}
-    >
-      GO TO CHECKOUT
-    </CustomButton>
+    <div className="buttons">
+      <CustomButton
+        onClick={() => {
+          history.push("/checkout");
+          toggleCartHidden();
+        }}
+      >
+        GO TO CHECKOUT
+      </CustomButton>
+      <div className="buttons__close" onClick={() => toggleCartHidden()}>
+        <Close />
+      </div>
+    </div>
   </div>
 );
 
@@ -51,4 +65,10 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-export default withRouter(connect(mapStateToProps)(CartDropdown));
+const mapDispatchToProps = (dispatch) => ({
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CartDropdown)
+);
