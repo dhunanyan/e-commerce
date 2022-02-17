@@ -29,6 +29,7 @@ export const CartDropdownContainer = styled.div`
 
   @media (max-width: 550px) {
     min-width: 200px;
+    max-height: 300px;
     right: 0px;
     left: 0;
     border-bottom: 1px solid #303030;
@@ -41,4 +42,33 @@ export const CartDropdownItems = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
+`;
+
+export const CartDropdownEmptyMessage = styled.span`
+  font-size: 32px;
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+`;
+
+export const CartDropdownButtons = styled.div`
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 0 0;
+`;
+
+export const CartDropdownCloseButton = styled.button`
+  color: #303030;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 350ms ease-out;
+  border: 1px solid #303030;
+  font-size: 48px;
+  line-height: 0;
+  padding: 0;
+
+  &:hover {
+    background-color: #303030;
+    color: #f1f1f1;
+  }
 `;

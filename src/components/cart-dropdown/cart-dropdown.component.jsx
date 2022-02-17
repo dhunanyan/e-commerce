@@ -17,26 +17,25 @@ import "./cart-dropdown.styles.scss";
 import {
   CartDropdownContainer,
   CartDropdownItems,
+  CartDropdownEmptyMessage,
+  CartDropdownButtons,
+  CartDropdownCloseButton,
 } from "./cart-dropdown.styles";
 
 const zoomHandle = (cartItems) => {
   if (cartItems.length >= 3) {
-    console.log(400);
     return 400;
   } else if (cartItems.length >= 2) {
-    console.log(300);
     return 300;
   } else if (cartItems.length >= 1) {
-    console.log(200);
     return 200;
   }
-  console.log(178);
   return 178;
 };
 
 const CartDropdown = ({ cartItems, hidden, history, toggleCartHidden }) => (
   <CartDropdownContainer hidden={hidden} zoom={zoomHandle(cartItems)}>
-    <CartDropdownItems className="cart-items">
+    <CartDropdownItems>
       {cartItems.length ? (
         cartItems.map((cartItem, index) => (
           <CSSTransition
@@ -50,10 +49,12 @@ const CartDropdown = ({ cartItems, hidden, history, toggleCartHidden }) => (
           </CSSTransition>
         ))
       ) : (
-        <span className="empty-message">Your cart is empty...</span>
+        <CartDropdownEmptyMessage>
+          Your cart is empty...
+        </CartDropdownEmptyMessage>
       )}
     </CartDropdownItems>
-    <div className="buttons">
+    <CartDropdownButtons>
       <CustomButton
         onClick={() => {
           history.push("/checkout");
@@ -62,10 +63,10 @@ const CartDropdown = ({ cartItems, hidden, history, toggleCartHidden }) => (
       >
         GO TO CHECKOUT
       </CustomButton>
-      <div className="buttons__close" onClick={() => toggleCartHidden()}>
+      <CartDropdownCloseButton onClick={() => toggleCartHidden()}>
         <Close />
-      </div>
-    </div>
+      </CartDropdownCloseButton>
+    </CartDropdownButtons>
   </CartDropdownContainer>
 );
 

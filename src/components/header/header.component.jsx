@@ -21,10 +21,8 @@ import {
   HeaderItem,
   HeaderLink,
   HeaderToggle,
-  HeaderCartDropdown,
+  HeaderButton,
 } from "./header.styles";
-
-import "./header.styles.scss";
 
 const Header = ({ currentUser, hidden, bodyLock }) => {
   const [menuIsActive, setMenuIsActive] = useState(false);
@@ -140,7 +138,9 @@ const Header = ({ currentUser, hidden, bodyLock }) => {
           </HeaderItem>
           {currentUser ? (
             <HeaderItem isFade={menuFadeIn[3]}>
-              <HeaderLink onClick={() => auth.signOut()}>SIGN OUT</HeaderLink>
+              <HeaderButton onClick={() => auth.signOut()}>
+                SIGN OUT
+              </HeaderButton>
             </HeaderItem>
           ) : (
             <HeaderItem isFade={menuFadeIn[4]}>
@@ -156,10 +156,10 @@ const Header = ({ currentUser, hidden, bodyLock }) => {
             isFade={menuFadeIn[5]}
             onClick={() => (menuIsActive ? handleTimesClick() : null)}
           >
-            <CartIcon className="header__icon" />
+            <CartIcon />
           </HeaderItem>
         </HeaderList>
-        <CartDropdown hidden={hidden} style={{ overflow: "hidden" }} />
+        <CartDropdown hidden={hidden} s />
         {menuIsActive ? (
           <HeaderToggle headerToggle="times" onClick={() => handleTimesClick()}>
             <Times />

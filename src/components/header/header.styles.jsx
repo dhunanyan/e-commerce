@@ -1,8 +1,34 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+const LinksCSS = css`
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 350ms ease-out;
+  font-weight: 700;
+  font-size: 20px;
+  min-width: max-content;
+  text-decoration: none;
+  color: #303030;
+
+  &:hover {
+    background-color: #303030;
+    color: #f1f1f1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+    color: #f1f1f1;
+
+    &:hover {
+      background-color: #f1f1f1;
+      color: #303030;
+    }
+  }
+`;
 
 export const HeaderWrapper = styled.header`
   height: 70px;
@@ -99,30 +125,12 @@ export const HeaderItem = styled.li`
 `;
 
 export const HeaderLink = styled(Link)`
-  padding: 8px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: all 350ms ease-out;
-  font-weight: 700;
-  font-size: 20px;
-  min-width: max-content;
-  text-decoration: none;
-  color: #303030;
+  ${LinksCSS}
+`;
 
-  &:hover {
-    background-color: #303030;
-    color: #f1f1f1;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 28px;
-    color: #f1f1f1;
-
-    &:hover {
-      background-color: #f1f1f1;
-      color: #303030;
-    }
-  }
+export const HeaderButton = styled.button`
+  ${LinksCSS}
+  border: 0;
 `;
 
 export const HeaderToggle = styled.div`
@@ -150,5 +158,3 @@ export const HeaderToggle = styled.div`
     pointer-events: all;
   }
 `;
-
-export const HeaderCartDropdown = styled(CartDropdown)``;

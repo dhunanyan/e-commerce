@@ -12,6 +12,18 @@ import { MdKeyboardArrowRight as RighttArrow } from "react-icons/md";
 import { FaTimes as Times } from "react-icons/fa";
 
 import { CSSTransition } from "react-transition-group";
+
+import {
+  CheckoutItemContainer,
+  CheckoutItemImg,
+  CheckoutItemLeftArrow,
+  CheckoutItemQuantity,
+  CheckoutItemRemove,
+  CheckoutItemRightArrow,
+  CheckoutItemValue,
+  CheckoutItemName,
+} from "./checkout-item.styles";
+
 import "./checkout-item.styles.scss";
 
 const CheckoutItem = ({
@@ -32,14 +44,13 @@ const CheckoutItem = ({
       timeout={500}
       classNames="fade-out"
     >
-      <div className="checkout-item">
-        <div className="image-container checkout-item__inner">
-          <img src={imageUrl} alt="Checkout-Item" />
-        </div>
-        <div className="name checkout-item__inner">{name}</div>
-        <div className="quantity checkout-item__inner">
-          <div
-            className="arrow arrow--left"
+      <CheckoutItemContainer>
+        <CheckoutItemImg>
+          <img src={imageUrl} alt="Checkout Item" />
+        </CheckoutItemImg>
+        <CheckoutItemName>{name}</CheckoutItemName>
+        <CheckoutItemQuantity>
+          <CheckoutItemLeftArrow
             onClick={() => {
               removeItem(cartItem);
 
@@ -52,20 +63,18 @@ const CheckoutItem = ({
             }}
           >
             <LeftArrow />
-          </div>
-          <span className="value">{quantity}</span>
-          <div
-            className="arrow arrow--right"
+          </CheckoutItemLeftArrow>
+          <CheckoutItemValue>{quantity}</CheckoutItemValue>
+          <CheckoutItemRightArrow
             onClick={() => {
               addItem(cartItem);
             }}
           >
             <RighttArrow />
-          </div>
-        </div>
-        <div className="price checkout-item__inner">{price}</div>
-        <div
-          className="remove-button checkout-item__inner"
+          </CheckoutItemRightArrow>
+        </CheckoutItemQuantity>
+        <CheckoutItemName>{price}</CheckoutItemName>
+        <CheckoutItemRemove
           onClick={() => {
             setIsRemoved(true);
             setTimeout(() => setIsRemoved(false), 250);
@@ -74,8 +83,8 @@ const CheckoutItem = ({
           }}
         >
           <Times />
-        </div>
-      </div>
+        </CheckoutItemRemove>
+      </CheckoutItemContainer>
     </CSSTransition>
   );
 };

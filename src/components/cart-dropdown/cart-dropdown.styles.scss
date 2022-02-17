@@ -1,38 +1,3 @@
-.empty-message {
-  font-size: 32px;
-  text-align: center;
-  padding: 0px 20px 20px 20px;
-}
-
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  align-items: center;
-}
-
-.buttons {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  font-size: 48px;
-  line-height: 0;
-  margin: 20px 0 0 0;
-
-  &__close {
-    color: #303030;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 350ms ease-out;
-    border: 1px solid #303030;
-
-    &:hover {
-      background-color: #303030;
-      color: #f1f1f1;
-    }
-  }
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
