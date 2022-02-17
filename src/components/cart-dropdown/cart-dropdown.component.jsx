@@ -14,21 +14,29 @@ import { BsFillArrowUpSquareFill as Close } from "react-icons/bs";
 
 import "./cart-dropdown.styles.scss";
 
-const CartDropdown = ({
-  cartItems,
-  hidden,
-  history,
-  dispatch,
-  toggleCartHidden,
-}) => (
-  <div
-    className={`cart-dropdown ${hidden ? "cart-dropdown--hidden" : ""} ${
-      cartItems.length >= 1 ? "cart-dropdown--zoom" : ""
-    } ${cartItems.length >= 2 ? "cart-dropdown--zoom1" : ""} ${
-      cartItems.length >= 3 ? "cart-dropdown--zoom2" : ""
-    }`}
-  >
-    <div className="cart-items">
+import {
+  CartDropdownContainer,
+  CartDropdownItems,
+} from "./cart-dropdown.styles";
+
+const zoomHandle = (cartItems) => {
+  if (cartItems.length >= 3) {
+    console.log(400);
+    return 400;
+  } else if (cartItems.length >= 2) {
+    console.log(300);
+    return 300;
+  } else if (cartItems.length >= 1) {
+    console.log(200);
+    return 200;
+  }
+  console.log(178);
+  return 178;
+};
+
+const CartDropdown = ({ cartItems, hidden, history, toggleCartHidden }) => (
+  <CartDropdownContainer hidden={hidden} zoom={zoomHandle(cartItems)}>
+    <CartDropdownItems className="cart-items">
       {cartItems.length ? (
         cartItems.map((cartItem, index) => (
           <CSSTransition
@@ -44,7 +52,7 @@ const CartDropdown = ({
       ) : (
         <span className="empty-message">Your cart is empty...</span>
       )}
-    </div>
+    </CartDropdownItems>
     <div className="buttons">
       <CustomButton
         onClick={() => {
@@ -58,7 +66,7 @@ const CartDropdown = ({
         <Close />
       </div>
     </div>
-  </div>
+  </CartDropdownContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
