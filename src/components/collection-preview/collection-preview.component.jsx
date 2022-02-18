@@ -1,40 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import { selectWindowSize } from "../../redux/window-size/window-size.selectors";
 
 import CollectionItem from "../collection-item/collection-item.component";
 
-import "./collection-preview.styles.scss";
+import {
+  CollectionPreviewsContainer,
+  CollectionPreviewsPreview,
+  CollectionPreviewTitle,
+} from "./collection-preview.styles";
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
-
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return windowDimensions;
-}
-
-const CollectionPreview = ({ title, items }) => {
-  const { width } = useWindowDimensions();
+const CollectionPreview = ({ title, items, size }) => {
+  const { width, height } = size;
   return (
-    <div className="collection-preview">
-      <h1 className="collection-preview__title">{title.toUpperCase()}</h1>
-      <div className="collection-preview__preview">
+    <CollectionPreviewsContainer>
+      <CollectionPreviewTitle>{title.toUpperCase()}</CollectionPreviewTitle>
+      <CollectionPreviewsPreview>
         {items
           .filter((item, idx) => {
             if (width > 768) {
@@ -48,9 +31,13 @@ const CollectionPreview = ({ title, items }) => {
           .map((item) => (
             <CollectionItem key={item.id} item={item} />
           ))}
-      </div>
-    </div>
+      </CollectionPreviewsPreview>
+    </CollectionPreviewsContainer>
   );
 };
 
-export default CollectionPreview;
+const mapStateToProps = createStructuredSelector({
+  size: selectWindowSize,
+});
+
+export default connect(mapStateToProps)(CollectionPreview);
