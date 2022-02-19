@@ -20,12 +20,14 @@ a {
 .body-container {
   margin: 70px auto 0px auto;
   max-width: 1300px;
+  min-height: 820px;
   padding: 30px 60px;
 }
 
 .wrapper {
   overflow-y: scroll;
   max-height: 100vh;
+  position: relative;
 }
 
 .wrapper.wrapper--locked {

@@ -9,7 +9,6 @@ import {
 } from "./menu-item.styles";
 
 const MenuItem = ({ title, imageUrl, history, linkUrl, match, className }) => {
-  console.log(className);
   return (
     <MenuItemContainer
       className={className}

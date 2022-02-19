@@ -9,14 +9,14 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
-export const selectCollection = memoize((collectionUrlParam) =>
-  createSelector(
-    [selectCollections],
-    (collections) => collections[collectionUrlParam]
-  )
-);
-
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
+);
+
+export const selectCollection = memoize((collectionUrlParam) =>
+  createSelector([selectCollections], (collections) =>
+    collections ? collections[collectionUrlParam] : null
+  )
 );
