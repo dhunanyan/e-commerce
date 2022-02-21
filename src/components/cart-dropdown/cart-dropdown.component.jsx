@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
@@ -33,51 +32,47 @@ const zoomHandle = (cartItems) => {
   return 178;
 };
 
-const CartDropdown = ({ cartItems, hidden, history, toggleCartHidden }) => (
-  <CartDropdownContainer hidden={hidden} zoom={zoomHandle(cartItems)}>
-    <CartDropdownItems>
-      {cartItems.length ? (
-        cartItems.map((cartItem, index) => (
-          <CSSTransition
-            in={true}
-            appear={true}
-            timeout={500}
-            classNames="fade-in"
-            key={index}
-          >
-            <CartItem key={cartItems.id} cartItem={cartItem} />
-          </CSSTransition>
-        ))
-      ) : (
-        <CartDropdownEmptyMessage>
-          Your cart is empty...
-        </CartDropdownEmptyMessage>
-      )}
-    </CartDropdownItems>
-    <CartDropdownButtons>
-      <CustomButton
-        onClick={() => {
-          history.push("/checkout");
-          toggleCartHidden();
-        }}
-      >
-        GO TO CHECKOUT
-      </CustomButton>
-      <CartDropdownCloseButton onClick={() => toggleCartHidden()}>
-        <Close />
-      </CartDropdownCloseButton>
-    </CartDropdownButtons>
-  </CartDropdownContainer>
-);
+const CartDropdown = ({ hidden }) => {
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-});
+  return (
+    <CartDropdownContainer hidden={hidden} zoom={zoomHandle(cartItems)}>
+      <CartDropdownItems>
+        {cartItems.length ? (
+          cartItems.map((cartItem, index) => (
+            <CSSTransition
+              in={true}
+              appear={true}
+              timeout={500}
+              classNames="fade-in"
+              key={index}
+            >
+              <CartItem key={cartItems.id} cartItem={cartItem} />
+            </CSSTransition>
+          ))
+        ) : (
+          <CartDropdownEmptyMessage>
+            Your cart is empty...
+          </CartDropdownEmptyMessage>
+        )}
+      </CartDropdownItems>
+      <CartDropdownButtons>
+        <CustomButton
+          onClick={() => {
+            history.push("/checkout");
+            dispatch(toggleCartHidden());
+          }}
+        >
+          GO TO CHECKOUT
+        </CustomButton>
+        <CartDropdownCloseButton onClick={() => dispatch(toggleCartHidden())}>
+          <Close />
+        </CartDropdownCloseButton>
+      </CartDropdownButtons>
+    </CartDropdownContainer>
+  );
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleCartHidden: () => dispatch(toggleCartHidden()),
-});
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CartDropdown)
-);
+export default CartDropdown;

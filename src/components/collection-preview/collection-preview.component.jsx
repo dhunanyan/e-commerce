@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import CollectionItem from "../collection-item/collection-item.component";
 
@@ -33,11 +34,18 @@ export function useWindowDimensions() {
   return windowDimensions;
 }
 
-const CollectionPreview = ({ title, items }) => {
+const CollectionPreview = ({ title, items, routeName }) => {
+  const history = useHistory();
+  const { path } = useRouteMatch();
   const windowSizes = useWindowDimensions();
+
   return (
     <CollectionPreviewsContainer>
-      <CollectionPreviewTitle>{title.toUpperCase()}</CollectionPreviewTitle>
+      <CollectionPreviewTitle
+        onClick={() => history.push(`${path}/${routeName}`)}
+      >
+        {title.toUpperCase()}
+      </CollectionPreviewTitle>
       <CollectionPreviewsPreview>
         {items
           .filter((item, idx) => {

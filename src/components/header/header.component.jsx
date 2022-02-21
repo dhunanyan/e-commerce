@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
@@ -24,7 +23,11 @@ import {
   HeaderButton,
 } from "./header.styles";
 
-const Header = ({ currentUser, hidden, bodyLock, signOutStart }) => {
+const Header = ({ bodyLock }) => {
+  const currentUser = useSelector(selectCurrentUser);
+  const hidden = useSelector(selectCartHidden);
+  const dispatch = useDispatch();
+  const signOutStartDispatch = () => dispatch(signOutStart());
   const [menuIsActive, setMenuIsActive] = useState(false);
   const [menuFadeIn, setMenuFadeIn] = useState({
     1: false,
@@ -138,7 +141,9 @@ const Header = ({ currentUser, hidden, bodyLock, signOutStart }) => {
           </HeaderItem>
           {currentUser ? (
             <HeaderItem isFade={menuFadeIn[3]}>
-              <HeaderButton onClick={signOutStart}>SIGN OUT</HeaderButton>
+              <HeaderButton onClick={signOutStartDispatch}>
+                SIGN OUT
+              </HeaderButton>
             </HeaderItem>
           ) : (
             <HeaderItem isFade={menuFadeIn[4]}>
@@ -172,13 +177,4 @@ const Header = ({ currentUser, hidden, bodyLock, signOutStart }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: selectCartHidden,
-});
-
-const mapDispatchtoProps = (dispatch) => ({
-  signOutStart: () => dispatch(signOutStart()),
-});
-
-export default connect(mapStateToProps, mapDispatchtoProps)(Header);
+export default Header;

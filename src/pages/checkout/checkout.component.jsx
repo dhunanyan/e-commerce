@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
@@ -13,9 +12,11 @@ import {
 import "./checkout.styles.scss";
 import { CSSTransition } from "react-transition-group";
 
-const CheckoutPage = ({ cartItems, total }) => {
+const CheckoutPage = () => {
   const [isRemoved, setIsRemoved] = useState(true);
   const [indexOfRemoved, setIndexOFRemoved] = useState(null);
+  const cartItems = useSelector(selectCartItems);
+  const total = useSelector(selectCartTotal);
   const onCheckoutItemClicked = (indexOfRemoved) => {
     setIsRemoved(false);
     setIndexOFRemoved(indexOfRemoved);
@@ -81,9 +82,4 @@ const CheckoutPage = ({ cartItems, total }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-  total: selectCartTotal,
-});
-
-export default connect(mapStateToProps)(CheckoutPage);
+export default CheckoutPage;
