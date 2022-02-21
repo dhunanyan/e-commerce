@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { signOutStart } from "../../redux/user/user.actions";
 
 import { HiMenuAlt3 as Bars } from "react-icons/hi";
 import { FaTimes as Times } from "react-icons/fa";
@@ -24,7 +24,7 @@ import {
   HeaderButton,
 } from "./header.styles";
 
-const Header = ({ currentUser, hidden, bodyLock }) => {
+const Header = ({ currentUser, hidden, bodyLock, signOutStart }) => {
   const [menuIsActive, setMenuIsActive] = useState(false);
   const [menuFadeIn, setMenuFadeIn] = useState({
     1: false,
@@ -138,9 +138,7 @@ const Header = ({ currentUser, hidden, bodyLock }) => {
           </HeaderItem>
           {currentUser ? (
             <HeaderItem isFade={menuFadeIn[3]}>
-              <HeaderButton onClick={() => auth.signOut()}>
-                SIGN OUT
-              </HeaderButton>
+              <HeaderButton onClick={signOutStart}>SIGN OUT</HeaderButton>
             </HeaderItem>
           ) : (
             <HeaderItem isFade={menuFadeIn[4]}>
@@ -179,4 +177,8 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectCartHidden,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchtoProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Header);
