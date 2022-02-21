@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -16,58 +16,42 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component {
-  state = {
-    isBodyLocked: false,
-  };
-  unsubscribeFromAuth = null;
+const App = ({ checkUserSession, currentUser }) => {
+  const [isBodyLocked, setIsBodyLocked] = useState(false);
 
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession]);
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  const bodyLockHandle = (isMenuActive) => {
+    setIsBodyLocked(isMenuActive);
+  };
 
-  render() {
-    const bodyLockHandle = (isMenuActive) => {
-      this.setState({ isBodyLocked: isMenuActive });
-    };
+  return (
+    <div
+      scroll={`${isBodyLocked ? "no" : "yes"}`}
+      className={`wrapper ${isBodyLocked ? "wrapper--locked" : ""}`}
+    >
+      <Header bodyLock={bodyLockHandle} />
 
-    return (
-      <div
-        scroll={`${this.state.isBodyLocked ? "no" : "yes"}`}
-        className={`wrapper ${
-          this.state.isBodyLocked ? "wrapper--locked" : ""
-        }`}
-      >
-        <Header bodyLock={bodyLockHandle} />
-
-        <div className="body-container">
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/shop" component={ShopPage} />
-            <Route exact path="/checkout" component={CheckoutPage} />
-            <Route
-              path="/signin"
-              render={() =>
-                this.props.currentUser ? (
-                  <Redirect to="/" />
-                ) : (
-                  <SigninAndSignupPage />
-                )
-              }
-            />
-          </Switch>
-        </div>
-
-        <Footer />
+      <div className="body-container">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SigninAndSignupPage />
+            }
+          />
+        </Switch>
       </div>
-    );
-  }
-}
+
+      <Footer />
+    </div>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
