@@ -1,19 +1,34 @@
 import React from "react";
-
 import StripeCheckout from "react-stripe-checkout";
 
-import "./stripe-button.styles.scss";
+import axios from "axios";
 
+import { StripeButton } from "./stripe-button.styles";
 import Logo from "../../assets/NOVELEX_Logo.png";
 
 const StripeCheckoutButton = ({ price }) => {
-  const priceForStripce = price * 100;
+  const priceForStripe = price * 100;
   const publishableKey =
     "pk_test_51KTccsAqyN9H2Cd0WvBCIQ13hHZAW3BC7roGpEpXfEq8xcQoXkRh6Jpr22tU1UvpLEhqFYp5GWNBZhvYSo36Basn008yhTSVtB";
 
   const onToken = (token) => {
-    console.log(token);
-    alert("Payment Succesful");
+    axios({
+      url: "payment",
+      method: "post",
+      data: {
+        amount: priceForStripe,
+        token,
+      },
+    })
+      .then((response) => {
+        alert("Payment Successful!");
+      })
+      .catch((error) => {
+        console.log("Payment Error: ", JSON.parse(error));
+        alert(
+          "There was an issue with your payment. Please make sure you use the provided credit card"
+        );
+      });
   };
 
   return (
@@ -23,13 +38,13 @@ const StripeCheckoutButton = ({ price }) => {
       shippingAddress
       image={Logo}
       description={`Your total is $${price}`}
-      amount={priceForStripce}
+      amount={priceForStripe}
       token={onToken}
       stripeKey={publishableKey}
       panelLabel="Pay Now"
       label="Pay Now"
     >
-      <button className="my-super-cool-button">Pay Now</button>
+      <StripeButton>Pay Now</StripeButton>
     </StripeCheckout>
   );
 };
