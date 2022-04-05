@@ -66,6 +66,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   padding: 0 60px;
   height: 100%;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 0 30px;

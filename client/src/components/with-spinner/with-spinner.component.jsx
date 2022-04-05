@@ -3,7 +3,7 @@ import React from "react";
 import { SpinnerOverlay, SpinnerContainer } from "./with-spinner.styles";
 
 const WithSpinner = (WrappedComponent) => {
-  // const spans = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // const spans = [...Array(9).keys()];
 
   const Spinner = ({ isLoading, ...otherProps }) =>
     isLoading ? (
